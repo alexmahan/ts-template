@@ -1,0 +1,27 @@
+# Ignore cache
+.sass-cache
+.cache
+
+# Ignore bundler binaries
+/bin/*
+!/bin/lint
+!/bin/start
+
+# OS
+._*
+.Spotlight-V100
+.Trashes
+*~
+*.lock
+*.swp
+.DS_Store
+.DS_Store?
+.Thumbs.db
+ehthumbs.db
+
+# project
+.vscode/
+node_modules/
+npm-debug.*
+.tmp/
+**.mo

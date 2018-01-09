@@ -1,0 +1,14 @@
+{
+  "version": "2.6.2",
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "target": "es5",
+    "sourceMap": true,
+    "experimentalDecorators": true
+  },
+  "exclude": [
+    ".tmp",
+    "node_modules",
+    "dist"
+  ]
+}
