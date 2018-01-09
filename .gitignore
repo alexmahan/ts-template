@@ -21,6 +21,7 @@ ehthumbs.db
 
 # project
 .vscode/
+dist/
 node_modules/
 npm-debug.*
 .tmp/
