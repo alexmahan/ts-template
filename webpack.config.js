@@ -1,7 +1,8 @@
 const path = require('path');
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+
 const extractMain = new ExtractTextPlugin('./css/main.css');
 
 module.exports = {
@@ -12,6 +13,15 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+        options: {
+          configFile: 'tslint.json',
+          emitErrors: true
+        }
+      },
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
@@ -35,6 +45,9 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: './static',
       to: './'
-    }])
+    }]),
+    new StyleLintPlugin({
+      syntax: 'scss'
+    })
   ]
 };
