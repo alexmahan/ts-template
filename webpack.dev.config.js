@@ -1,18 +1,25 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const extractMain = new ExtractTextPlugin('./css/main.css');
 
 module.exports = {
   entry: ['./src/css/main.scss', './src/js/index.ts'],
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   devServer: {
     contentBase: './static'
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: path.resolve(__dirname, 'src'),
+        loader: 'source-map-loader',
+        enforce: 'pre',
+      },
       {
         test: /\.ts$/,
         enforce: 'pre',

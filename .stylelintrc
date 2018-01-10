@@ -1,2 +1,35 @@
-rules:
-  color-named: 'never'
+ {
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "unit-no-unknown": true,
+    "block-no-empty": true,
+    "color-no-invalid-hex": true,
+    "property-no-unknown": true,
+    "property-no-vendor-prefix": true,
+    "color-hex-case": "lower",
+    "number-leading-zero": "never",
+    "string-quotes": "single",
+    "length-zero-no-unit": true,
+    "value-keyword-case": "lower",
+    "value-list-comma-space-after": "always",
+    "property-case": "lower",
+    "declaration-colon-space-after": "always",
+    "declaration-block-semicolon-newline-after": "always",
+    "block-closing-brace-newline-before": "always",
+    "block-opening-brace-space-before": "always",
+    "comment-empty-line-before": [ "always", {
+      "ignore": ["after-comment", "stylelint-commands"]
+    } ],
+    "indentation": [2, {
+      "except": ["value"]
+    }],
+    "max-empty-lines": 2,
+    "rule-empty-line-before": [ "always", {
+      "except": ["first-nested"],
+      "ignore": ["after-comment"]
+    } ],
+    "order/properties-alphabetical-order": true
+  }
+}

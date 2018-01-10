@@ -5,9 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --progress --watch",
-    "start": "webpack-dev-server --open",
-    "build": "webpack"
+    "watch": "webpack --progress --watch --config webpack.dev.config.js",
+    "start": "webpack-dev-server --open --config webpack.dev.config.js",
+    "build": "webpack --config webpack.prod.config.js"
   },
   "keywords": [],
   "author": "",
@@ -20,13 +20,16 @@
     "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
+    "source-map-loader": "^0.2.3",
     "style-loader": "^0.18.2",
     "stylelint": "^8.4.0",
+    "stylelint-order": "^0.8.0",
     "stylelint-webpack-plugin": "^0.9.0",
     "ts-loader": "^3.2.0",
     "tslint": "^5.8.0",
     "tslint-loader": "^3.5.3",
     "typescript": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.0"
   }
