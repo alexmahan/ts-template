@@ -2,13 +2,13 @@ const path = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const extractMain = new ExtractTextPlugin('./dist/css/main.css');
+const extractMain = new ExtractTextPlugin('./css/main.css');
 
 module.exports = {
-  entry: './src/js/index.ts',
-  devtool: 'inline-source-map',
+  entry: ['./src/css/main.scss', './src/js/index.ts'],
+  devtool: 'source-map',
   devServer: {
-    contentBase: './src'
+    contentBase: './static'
   },
   module: {
     rules: [
@@ -17,9 +17,9 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/
       },
-      { // sass / scss loader for webpack. For main.scss
+      {
         test: /\.scss$/,
-        loader: extractMain.extract(['css-loader', 'postcss-loader', 'sass-loader'])
+        loader: extractMain.extract(['css-loader', 'sass-loader'])
       }
     ]
   },
@@ -33,8 +33,8 @@ module.exports = {
   plugins: [
     extractMain,
     new CopyWebpackPlugin([{
-      from: './src/*.html',
-      to: './dist/*.html'
+      from: './static',
+      to: './'
     }])
   ]
 };
