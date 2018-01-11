@@ -5,13 +5,12 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const extractMain = new ExtractTextPlugin('./css/main.css');
+const extractHTML = new ExtractTextPlugin('./index.html');
 
 module.exports = {
-  entry: ['./src/css/main.scss', './src/js/index.ts'],
+  context: __dirname + '/src/',
+  entry: ['./index.html', './js/index.ts', './css/main.scss'],
   devtool: 'source-map',
-  devServer: {
-    contentBase: './static'
-  },
   module: {
     rules: [
       {
@@ -37,6 +36,37 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: extractMain.extract(['css-loader', 'sass-loader'])
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.html$/,
+        loader: extractHTML.extract(
+          [
+            'html-loader',
+            {
+              loader: 'posthtml-loader',
+              options: {
+                ident: 'posthtml',
+                plugins: [
+                  /* PostHTML Plugins */
+                  require('posthtml-include')({
+                    root: './src/'
+                  })
+                ]
+              }
+            }
+          ]
+        )
       }
     ]
   },
@@ -49,10 +79,7 @@ module.exports = {
   },
   plugins: [
     extractMain,
-    new CopyWebpackPlugin([{
-      from: './static',
-      to: './'
-    }]),
+    extractHTML,
     new StyleLintPlugin({
       syntax: 'scss'
     }),
@@ -61,6 +88,10 @@ module.exports = {
       uglifyOptions: {
         ecma: 6
       }
-    })
+    }),
+    new CopyWebpackPlugin([{
+      from: './static',
+      to: './static'
+    }]),
   ]
 };
