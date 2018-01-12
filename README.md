@@ -1,5 +1,8 @@
 # Ultra minimal TS/SCSS/Webpack template
 
+1. Clone the dang repo.
+2. `npm install` on the command line to install dependencies.
+
 ## Running dev server
 `npm start` to run a dev server on http://localhost:8080
 
